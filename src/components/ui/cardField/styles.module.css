@@ -13,8 +13,9 @@
   transform: scale(1.05);
 }
 
-.card.open {
-  border-color: var(--color-current);
+.open {
+  background-color: var(--color-current);
+  height: 100%;
 }
 
 .cardBack {

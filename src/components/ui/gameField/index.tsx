@@ -6,6 +6,7 @@ import { shuffle } from '../../../utils/shuffle';
 export const GameField = ({ fieldCards }) => {
   const [gameCards, setGameCards] = useState([]);
   const [openCards, setOpenCards] = useState([]);
+  const [openIdenticalCards, setOpenIdenticalCards] = useState([]);
   const [oneImg, setOneImg] = useState();
   const [twoImg, setTwoImg] = useState();
 
@@ -13,21 +14,26 @@ export const GameField = ({ fieldCards }) => {
     setGameCards(shuffle(fieldCards));
   }, []);
 
+  console.log(oneImg, twoImg);
+  console.log(openIdenticalCards);
+
   const handleClick = (e) => {
-    console.log(e.target);
+    console.log(e.target.dataset.name);
     setOpenCards((prev) => [...prev, e.target.id]);
 
     if (!oneImg && !twoImg) {
-      setOneImg(e.target.id);
+      setOneImg(e.target.dataset.name);
     } else if (oneImg && !twoImg) {
-      setTwoImg(e.target.id);
-      if (oneImg !== e.target.id) {
+      setTwoImg(e.target.dataset.name);
+      if (oneImg !== e.target.dataset.name) {
         setTimeout(() => {
           setOpenCards(openCards.slice(0, openCards.length - 1));
+
           setOneImg(null);
           setTwoImg(null);
         }, 1000);
-      } else if (oneImg === e.target.id) {
+      } else if (oneImg === e.target.dataset.name) {
+        setOpenIdenticalCards((prev) => [...prev, oneImg]);
         setOneImg(null);
         setTwoImg(null);
       }
@@ -42,6 +48,7 @@ export const GameField = ({ fieldCards }) => {
           card={card}
           openCards={openCards}
           handleClick={handleClick}
+          openIdenticalCards={openIdenticalCards}
         />
       ))}
     </div>
