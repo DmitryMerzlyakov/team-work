@@ -48,9 +48,9 @@
   --container-width-xl: 1140px; /* Для очень больших экранов */
 
   /* --- Радиусы скругления --- */
-  --border-radius-small: 0.25rem; /* Маленький радиус */
-  --border-radius-medium: 0.5rem; /* Средний радиус */
-  --border-radius-hard: 1rem; /* Большой радиус */
+  --border-radius-small: 1rem; /* Маленький радиус */
+  --border-radius-medium: 1.5rem; /* Средний радиус */
+  --border-radius-hard: 2.5rem; /* Большой радиус */
 }
 
 * {
