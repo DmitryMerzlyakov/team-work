@@ -1,0 +1,5 @@
+.gameContainer {
+  display: grid;
+  grid-template-columns: repeat(6, 100px);
+  gap: 10px;
+}
