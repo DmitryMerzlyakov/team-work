@@ -63,7 +63,6 @@ export const StartGameForm = ({ fields, onStart }: IStartGameFormProps) => {
           </div>
         </div>
       </div>
-
       <Button type='submit'>Начать игру!</Button>
     </form>
   )
