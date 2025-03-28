@@ -1,11 +1,14 @@
 import styles from './styles.module.css';
-export const CardField = ({ card, openCards }) => {
+export const CardField = ({ card, id, openCards, handleClick }) => {
   return (
-    <div className={styles.card}>
-      {openCards.includes(card.value) ? (
-        <div className={styles.cardFront}> {card.value}</div> //позже заменб на image
+    <div className={styles.card} id={id} onClick={(e) => handleClick(e)}>
+      {openCards.includes(id) ? (
+        <div id={id} className={styles.cardFront}>
+          {' '}
+          {card.value}
+        </div> //позже заменб на image
       ) : (
-        <div className={styles.cardBack}></div>
+        <div id={id} className={styles.cardBack}></div>
       )}
     </div>
   );
