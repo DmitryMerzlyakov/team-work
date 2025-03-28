@@ -1,0 +1,8 @@
+.mainLayout {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background: var(--color-background);
+  height: 100vh;
+  overflow: hidden;
+}

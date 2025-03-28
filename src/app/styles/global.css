@@ -1,0 +1,80 @@
+@use './fonts';
+
+:root {
+  /* --- Основные цвета --- */
+  --color-text-ligth: #fcfcfc;
+  --color-text-dark: #304859;
+
+  --color-background-ligth: #fcfcfc;
+  --color-background-dark: #152938;
+
+  /* --- Размеры шрифтов --- */
+  --font-size-16: 1rem; /* Базовый размер шрифта (16px) */
+  --font-size-14: 0.875rem; /* Маленький размер шрифта (14px) */
+  --font-size-12: 0.5rem; /* Маленький размер шрифта (12px) */
+  --font-size-20: 1.25rem; /* Большой размер шрифта (20px) */
+  --font-size-24: 1.5rem; /* Очень большой размер шрифта (24px) */
+
+  /* --- Интервалы между строками --- */
+  --line-height-medium: 1.5; /* Базовый интервал между строками */
+  --line-height-small: 1.25; /* Маленький интервал */
+  --line-height-hard: 2; /* Большой интервал */
+
+  /* --- Начертание шрифта --- */
+  --fontWeight-100: 100;
+  --fontWeight-200: 200;
+  --fontWeight-300: 300;
+  --fontWeight-400: 400;
+  --fontWeight-500: 500;
+  --fontWeight-600: 600;
+  --fontWeight-700: 700;
+  --fontWeight-800: 800;
+  --fontWeight-900: 900;
+
+  /* --- Шрифты --- */
+  --font-regular: 'Atkinson Hyperlegible', sans-serif;
+
+  /* --- Отступы и размеры элементов --- */
+  --spacing-4: 0.25rem; /* Очень маленький отступ (4px) */
+  --spacing-8: 0.5rem; /* Маленький отступ (8px) */
+  --spacing-16: 1rem; /* Средний отступ (16px) */
+  --spacing-24: 1.5rem; /* Большой отступ (24px) */
+  --spacing-32: 2rem; /* Очень большой отступ (32px) */
+
+  /* --- Ширина контейнера --- */
+  --container-width-sm: 540px; /* Для маленьких экранов */
+  --container-width-md: 720px; /* Для средних экранов */
+  --container-width-lg: 960px; /* Для больших экранов */
+  --container-width-xl: 1140px; /* Для очень больших экранов */
+
+  /* --- Радиусы скругления --- */
+  --border-radius-small: 0.25rem; /* Маленький радиус */
+  --border-radius-medium: 0.5rem; /* Средний радиус */
+  --border-radius-hard: 1rem; /* Большой радиус */
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-regular);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-medium);
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
