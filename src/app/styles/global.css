@@ -8,6 +8,9 @@
   --color-background-ligth: #fcfcfc;
   --color-background-dark: #152938;
 
+  --color-current: #fda214;
+  --color-background-blue: #bcced9;
+
   /* --- Размеры шрифтов --- */
   --font-size-16: 1rem; /* Базовый размер шрифта (16px) */
   --font-size-14: 0.875rem; /* Маленький размер шрифта (14px) */
