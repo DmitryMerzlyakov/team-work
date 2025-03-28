@@ -16,6 +16,22 @@ export const GameField = ({ fieldCards }) => {
   const handleClick = (e) => {
     console.log(e.target);
     setOpenCards((prev) => [...prev, e.target.id]);
+
+    if (!oneImg && !twoImg) {
+      setOneImg(e.target.id);
+    } else if (oneImg && !twoImg) {
+      setTwoImg(e.target.id);
+      if (oneImg !== e.target.id) {
+        setTimeout(() => {
+          setOpenCards(openCards.slice(0, openCards.length - 1));
+          setOneImg(null);
+          setTwoImg(null);
+        }, 1000);
+      } else if (oneImg === e.target.id) {
+        setOneImg(null);
+        setTwoImg(null);
+      }
+    }
   };
   return (
     <div className={styles.gameContainer}>
