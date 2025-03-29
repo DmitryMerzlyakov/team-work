@@ -20,5 +20,5 @@ export const fieldsData: IFieldData[] = [
 
 export const cards = Array.from({ length: 50 }, (_, index) => ({
   value: (index + 1).toString(),
-  // icons: `../assets/icons/icon${index + 1}.png`,
+  icon: `/icons/icon${index + 1}.png`,
 }));

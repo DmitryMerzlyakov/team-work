@@ -48,7 +48,7 @@ export const GameField = ({
           openCards={openCards}
           handleClick={handleClick}
           openIdenticalCards={openIdenticalCards}
-          size={currentFieldsData.size}
+          currentFieldsData={currentFieldsData}
         />
       ))}
     </div>
