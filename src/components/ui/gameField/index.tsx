@@ -27,11 +27,16 @@ export const GameField = ({
   }, [openIdenticalCards]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    openSound.play();
     const cardName = (
       (e.target as Element)?.closest('[data-name]') as HTMLElement
     )?.dataset.name as string;
-    setOpenCards((prev) => [...prev, (e.target as Element).id]);
+    const cardId = (e.target as Element).id;
+
+    if (openCards.includes(cardId)) {
+      return;
+    }
+    openSound.play();
+    setOpenCards((prev) => [...prev, cardId]);
 
     if (!oneImg && !twoImg) {
       setOneImg(cardName);
@@ -50,7 +55,6 @@ export const GameField = ({
         setOpenIdenticalCards((prev) => [...prev, oneImg]);
         setOneImg(null);
         setTwoImg(null);
-        console.log(fieldCards.length, openIdenticalCards.length * 2);
       }
     }
   };
