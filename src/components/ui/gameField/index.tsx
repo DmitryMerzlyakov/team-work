@@ -1,21 +1,14 @@
 import { useEffect, useState } from 'react';
 import { CardField } from '../cardField';
 import styles from './styles.module.css';
-import { shuffle } from '../../../utils/shuffle';
 
-export const GameField = ({ fieldCards }) => {
-  const [gameCards, setGameCards] = useState([]);
+export const GameField = ({ fieldCards, currentFieldsData }) => {
   const [openCards, setOpenCards] = useState([]);
   const [openIdenticalCards, setOpenIdenticalCards] = useState([]);
   const [oneImg, setOneImg] = useState();
   const [twoImg, setTwoImg] = useState();
 
-  useEffect(() => {
-    setGameCards(shuffle(fieldCards));
-  }, []);
-
-  console.log(oneImg, twoImg);
-  console.log(openIdenticalCards);
+  console.log(String(currentFieldsData.size));
 
   const handleClick = (e) => {
     console.log(e.target.dataset.name);
@@ -40,8 +33,10 @@ export const GameField = ({ fieldCards }) => {
     }
   };
   return (
-    <div className={styles.gameContainer}>
-      {gameCards.map((card, index) => (
+    <div
+      className={`${styles.gameContainer} ${styles[`containerSize${String(currentFieldsData.size)}`]}`}
+    >
+      {fieldCards.map((card, index) => (
         <CardField
           key={index}
           id={index.toString()}
@@ -49,6 +44,7 @@ export const GameField = ({ fieldCards }) => {
           openCards={openCards}
           handleClick={handleClick}
           openIdenticalCards={openIdenticalCards}
+          size={currentFieldsData.size}
         />
       ))}
     </div>

@@ -1,5 +1,14 @@
 .gameContainer {
   display: grid;
+  gap: 3px;
+}
+
+.containerSize6 {
   grid-template-columns: repeat(6, 100px);
-  gap: 10px;
+}
+.containerSize8 {
+  grid-template-columns: repeat(8, 80px);
+}
+.containerSize10 {
+  grid-template-columns: repeat(10, 60px);
 }

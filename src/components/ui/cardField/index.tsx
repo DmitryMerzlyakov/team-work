@@ -5,9 +5,14 @@ export const CardField = ({
   openCards,
   handleClick,
   openIdenticalCards,
+  size,
 }) => {
   return (
-    <div className={styles.card} id={id} onClick={(e) => handleClick(e)}>
+    <div
+      className={`${styles.card} ${styles[`cardSize${String(size)}`]}`}
+      id={id}
+      onClick={(e) => handleClick(e)}
+    >
       {openCards.includes(id) ? (
         <div
           id={id}

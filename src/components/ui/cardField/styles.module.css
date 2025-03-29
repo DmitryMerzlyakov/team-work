@@ -1,12 +1,23 @@
 .card {
-  width: 100px;
-  height: 100px;
   border: 2px solid #333;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
   position: relative;
   transition: transform 0.3s;
+}
+
+.cardSize6 {
+  min-width: 100px;
+  min-height: 100px;
+}
+.cardSize8 {
+  min-width: 80px;
+  min-height: 80px;
+}
+.cardSize10 {
+  min-width: 60px;
+  min-height: 60px;
 }
 
 .card:hover {
