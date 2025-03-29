@@ -10,7 +10,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path={links.main} element={<MainLayout />}>
         <Route index element={<MainPage />} />
-        <Route path={`/${links.game}`} element={<GamePage />} />
+        <Route path={links.game} element={<GamePage />} />
       </Route>
 
       <Route path={links.error} element={<ErrorPage />} />
