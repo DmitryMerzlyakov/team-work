@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { CardField } from '../cardField';
 import styles from './styles.module.css';
 import { IGameFieldProps } from './interfaces';
+import cardOpenSound from '../../../assets/sounds/card-open.mp3';
+import cardErrorSound from '../../../assets/sounds/card-error.mp3';
+import cardsuccessSound from '../../../assets/sounds/click-success.mp3';
 
 export const GameField = ({
   fieldCards,
@@ -12,7 +15,12 @@ export const GameField = ({
   const [oneImg, setOneImg] = useState<string | null>(null);
   const [twoImg, setTwoImg] = useState<string | null>(null);
 
+  const openSound = new Audio(cardOpenSound);
+  const errorSound = new Audio(cardErrorSound);
+  const successSound = new Audio(cardsuccessSound);
+
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    openSound.play();
     const cardName = (
       (e.target as Element)?.closest('[data-name]') as HTMLElement
     )?.dataset.name as string;
@@ -24,12 +32,14 @@ export const GameField = ({
       setTwoImg(cardName);
       if (oneImg !== cardName) {
         setTimeout(() => {
+          errorSound.play();
           setOpenCards(openCards.slice(0, openCards.length - 1));
 
           setOneImg(null);
           setTwoImg(null);
-        }, 1000);
+        }, 500);
       } else if (oneImg === cardName) {
+        successSound.play();
         setOpenIdenticalCards((prev) => [...prev, oneImg]);
         setOneImg(null);
         setTwoImg(null);
