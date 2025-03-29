@@ -5,6 +5,7 @@
   cursor: pointer;
   position: relative;
   transition: transform 0.3s;
+  font-weight: var(--fontWeight-700);
 }
 
 .cardSize6 {

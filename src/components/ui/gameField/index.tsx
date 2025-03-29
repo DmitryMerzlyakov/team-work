@@ -5,12 +5,14 @@ import { IGameFieldProps } from './interfaces';
 import cardOpenSound from '../../../assets/sounds/card-open.mp3';
 import cardErrorSound from '../../../assets/sounds/card-error.mp3';
 import cardsuccessSound from '../../../assets/sounds/click-success.mp3';
+import { GameOverWindow } from '../gameOverWindow.tsx';
 
 export const GameField = ({
   fieldCards,
   currentFieldsData,
 }: IGameFieldProps) => {
   const [openCards, setOpenCards] = useState<string[]>([]);
+  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(true);
   const [openIdenticalCards, setOpenIdenticalCards] = useState<string[]>([]);
   const [oneImg, setOneImg] = useState<string | null>(null);
   const [twoImg, setTwoImg] = useState<string | null>(null);
@@ -18,6 +20,8 @@ export const GameField = ({
   const openSound = new Audio(cardOpenSound);
   const errorSound = new Audio(cardErrorSound);
   const successSound = new Audio(cardsuccessSound);
+
+  console.log('openIdenticalCards', openIdenticalCards);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     openSound.play();
@@ -43,6 +47,9 @@ export const GameField = ({
         setOpenIdenticalCards((prev) => [...prev, oneImg]);
         setOneImg(null);
         setTwoImg(null);
+        if (openIdenticalCards.length * 2 === fieldCards.length) {
+          setOpenGameOverWindow(true);
+        }
       }
     }
   };
@@ -61,6 +68,7 @@ export const GameField = ({
           currentFieldsData={currentFieldsData}
         />
       ))}
+      {openGameOverWindow && <GameOverWindow setOpen={setOpenGameOverWindow} />}
     </div>
   );
 };
