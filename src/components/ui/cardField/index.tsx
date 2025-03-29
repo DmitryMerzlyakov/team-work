@@ -1,3 +1,4 @@
+import { ICardFieldProps } from './interfaces';
 import styles from './styles.module.css';
 export const CardField = ({
   card,
@@ -6,12 +7,13 @@ export const CardField = ({
   handleClick,
   openIdenticalCards,
   size,
-}) => {
+}: ICardFieldProps) => {
   return (
     <div
       className={`${styles.card} ${styles[`cardSize${String(size)}`]}`}
       id={id}
       onClick={(e) => handleClick(e)}
+      data-name={card.value}
     >
       {openCards.includes(id) ? (
         <div
@@ -26,7 +28,7 @@ export const CardField = ({
           {card.value}
         </div> //позже заменб на image
       ) : (
-        <div data-name={card.value} id={id} className={styles.cardBack}></div>
+        <div id={id} className={styles.cardBack}></div>
       )}
     </div>
   );

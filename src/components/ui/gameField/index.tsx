@@ -1,31 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CardField } from '../cardField';
 import styles from './styles.module.css';
+import { IGameFieldProps } from './interfaces';
 
-export const GameField = ({ fieldCards, currentFieldsData }) => {
-  const [openCards, setOpenCards] = useState([]);
-  const [openIdenticalCards, setOpenIdenticalCards] = useState([]);
-  const [oneImg, setOneImg] = useState();
-  const [twoImg, setTwoImg] = useState();
+export const GameField = ({
+  fieldCards,
+  currentFieldsData,
+}: IGameFieldProps) => {
+  const [openCards, setOpenCards] = useState<string[]>([]);
+  const [openIdenticalCards, setOpenIdenticalCards] = useState<string[]>([]);
+  const [oneImg, setOneImg] = useState<string | null>(null);
+  const [twoImg, setTwoImg] = useState<string | null>(null);
 
-  console.log(String(currentFieldsData.size));
-
-  const handleClick = (e) => {
-    console.log(e.target.dataset.name);
-    setOpenCards((prev) => [...prev, e.target.id]);
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const cardName = (
+      (e.target as Element)?.closest('[data-name]') as HTMLElement
+    )?.dataset.name as string;
+    setOpenCards((prev) => [...prev, (e.target as Element).id]);
 
     if (!oneImg && !twoImg) {
-      setOneImg(e.target.dataset.name);
+      setOneImg(cardName);
     } else if (oneImg && !twoImg) {
-      setTwoImg(e.target.dataset.name);
-      if (oneImg !== e.target.dataset.name) {
+      setTwoImg(cardName);
+      if (oneImg !== cardName) {
         setTimeout(() => {
           setOpenCards(openCards.slice(0, openCards.length - 1));
 
           setOneImg(null);
           setTwoImg(null);
         }, 1000);
-      } else if (oneImg === e.target.dataset.name) {
+      } else if (oneImg === cardName) {
         setOpenIdenticalCards((prev) => [...prev, oneImg]);
         setOneImg(null);
         setTwoImg(null);
