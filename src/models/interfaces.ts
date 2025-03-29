@@ -10,3 +10,8 @@ export interface ICurrgentGameInfo {
   type: TCurrentGameCards;
   size: number;
 }
+
+export interface ICard {
+  value: string;
+  icon: string;
+}

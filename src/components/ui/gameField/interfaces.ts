@@ -1,6 +1,6 @@
-import { IFieldData } from '../../../models/interfaces';
+import { ICard, ICurrgentGameInfo } from '../../../models/interfaces';
 
 export interface IGameFieldProps {
-  fieldCards: { value: string }[];
-  currentFieldsData: IFieldData;
+  fieldCards: ICard[];
+  currentFieldsData: ICurrgentGameInfo;
 }

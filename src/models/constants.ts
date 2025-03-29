@@ -1,4 +1,4 @@
-import { IFieldData } from './interfaces';
+import { ICard, IFieldData } from './interfaces';
 
 export const fieldsData: IFieldData[] = [
   {
@@ -18,7 +18,7 @@ export const fieldsData: IFieldData[] = [
   },
 ];
 
-export const cards = Array.from({ length: 50 }, (_, index) => ({
+export const cards: ICard[] = Array.from({ length: 50 }, (_, index) => ({
   value: (index + 1).toString(),
   icon: `/icons/icon${index + 1}.png`,
 }));

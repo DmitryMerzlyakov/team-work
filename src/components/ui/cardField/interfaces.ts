@@ -1,10 +1,10 @@
-import { IFieldData } from '../../../models/interfaces';
+import { ICard, ICurrgentGameInfo } from '../../../models/interfaces';
 
 export interface ICardFieldProps {
-  card: { value: string };
+  card: ICard;
   id: string;
   openCards: string[];
   handleClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   openIdenticalCards: string[];
-  currentFieldsData: IFieldData;
+  currentFieldsData: ICurrgentGameInfo;
 }
