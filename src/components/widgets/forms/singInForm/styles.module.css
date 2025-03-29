@@ -1,0 +1,15 @@
+.signin {
+  width: 650px;
+  display: flex;
+  gap: var(--spacing-32);
+  flex-direction: column;
+  padding: var(--spacing-32);
+  border-radius: var(--border-radius-medium);
+  background-color: var(--color-background-ligth);
+}
+
+.signin__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}

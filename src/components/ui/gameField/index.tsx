@@ -12,7 +12,7 @@ export const GameField = ({
   currentFieldsData,
 }: IGameFieldProps) => {
   const [openCards, setOpenCards] = useState<string[]>([]);
-  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(true);
+  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(false);
   const [openIdenticalCards, setOpenIdenticalCards] = useState<string[]>([]);
   const [oneImg, setOneImg] = useState<string | null>(null);
   const [twoImg, setTwoImg] = useState<string | null>(null);
@@ -53,6 +53,7 @@ export const GameField = ({
       }
     }
   };
+
   return (
     <div
       className={`${styles.gameContainer} ${styles[`containerSize${String(currentFieldsData.size)}`]}`}

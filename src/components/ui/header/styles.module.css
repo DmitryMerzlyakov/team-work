@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2% 12%;
+}
+
+.header__children {
+  width: 300px;
+  display: flex;
+  gap: var(--spacing-8);
+}
+
+.header__user {  
+  font-weight: var(--fontWeight-700);
+  font-size: var(--font-size-20);
+}

@@ -12,6 +12,7 @@ export const GamePage = () => {
 
   useEffect(() => {
     beginSound.play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
