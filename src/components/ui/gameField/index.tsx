@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardField } from '../cardField';
 import styles from './styles.module.css';
 import { IGameFieldProps } from './interfaces';
@@ -12,7 +12,7 @@ export const GameField = ({
   currentFieldsData,
 }: IGameFieldProps) => {
   const [openCards, setOpenCards] = useState<string[]>([]);
-  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(true);
+  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(false);
   const [openIdenticalCards, setOpenIdenticalCards] = useState<string[]>([]);
   const [oneImg, setOneImg] = useState<string | null>(null);
   const [twoImg, setTwoImg] = useState<string | null>(null);
@@ -20,8 +20,11 @@ export const GameField = ({
   const openSound = new Audio(cardOpenSound);
   const errorSound = new Audio(cardErrorSound);
   const successSound = new Audio(cardsuccessSound);
-
-  console.log('openIdenticalCards', openIdenticalCards);
+  useEffect(() => {
+    if (openIdenticalCards.length * 2 === fieldCards.length) {
+      setOpenGameOverWindow(true);
+    }
+  }, [openIdenticalCards]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     openSound.play();
@@ -47,9 +50,7 @@ export const GameField = ({
         setOpenIdenticalCards((prev) => [...prev, oneImg]);
         setOneImg(null);
         setTwoImg(null);
-        if (openIdenticalCards.length * 2 === fieldCards.length) {
-          setOpenGameOverWindow(true);
-        }
+        console.log(fieldCards.length, openIdenticalCards.length * 2);
       }
     }
   };
