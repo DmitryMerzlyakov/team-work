@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
-import styles from './styles.module.css';
+import React, { useEffect, useState } from 'react';
 
-interface ITimerProps {
-  startTimer: boolean;
-  stopTimer: boolean;
+interface TimerProps {
+  startTimer: boolean; // Условие для запуска таймера
 }
 
-export const Timer = ({ startTimer, stopTimer }: ITimerProps) => {
+export const Timer: React.FC<TimerProps> = ({ startTimer }) => {
   const [time, setTime] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -20,16 +18,16 @@ export const Timer = ({ startTimer, stopTimer }: ITimerProps) => {
       }, 1000);
     }
 
-    if (stopTimer && isActive) {
+    if (!startTimer) {
       setIsActive(false);
       if (interval) clearInterval(interval);
-      setTime(0); // Сбрасываем время
     }
 
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [startTimer, stopTimer, isActive]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startTimer]);
 
   const formatTime = (timeInSeconds: number): string => {
     const minutes = Math.floor(timeInSeconds / 60)
@@ -39,9 +37,12 @@ export const Timer = ({ startTimer, stopTimer }: ITimerProps) => {
     return `${minutes}:${seconds}`;
   };
 
+  console.log(time);
+
+
   return (
-    <div className={styles.timer}>
-      <p className={styles.timer__text}>Таймер: {formatTime(time)}</p>
+    <div>
+      <h3>Таймер: {formatTime(time)}</h3>
     </div>
   );
 };
