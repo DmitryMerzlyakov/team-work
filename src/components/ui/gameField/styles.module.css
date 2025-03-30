@@ -1,3 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
 .gameContainer {
   display: grid;
   gap: 3px;
@@ -11,4 +17,10 @@
 }
 .containerSize10 {
   grid-template-columns: repeat(10, 60px);
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

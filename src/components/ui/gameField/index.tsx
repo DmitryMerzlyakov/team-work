@@ -6,14 +6,18 @@ import cardOpenSound from '../../../assets/sounds/card-open.mp3';
 import cardErrorSound from '../../../assets/sounds/card-error.mp3';
 import cardsuccessSound from '../../../assets/sounds/click-success.mp3';
 import { GameOverWindow } from '../gameOverWindow.tsx';
+import classNames from 'classnames';
+import { MoveCounter, Timer } from '../index.ts';
 
 export const GameField = ({
   fieldCards,
   currentFieldsData,
 }: IGameFieldProps) => {
   const [openCards, setOpenCards] = useState<string[]>([]);
-  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(true);
+  const [startGame, setStartGame] = useState<boolean>(false);
+  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(false);
   const [openIdenticalCards, setOpenIdenticalCards] = useState<string[]>([]);
+  const [moves, setMoves] = useState<number>(0);
   const [oneImg, setOneImg] = useState<string | null>(null);
   const [twoImg, setTwoImg] = useState<string | null>(null);
   const [gapCount, setGapCount] = useState(0);
@@ -29,6 +33,8 @@ export const GameField = ({
   }, [openIdenticalCards]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    openSound.play();
+    if (startGame === false) setStartGame(true);
     const cardName = (
       (e.target as Element)?.closest('[data-name]') as HTMLElement
     )?.dataset.name as string;
@@ -49,36 +55,42 @@ export const GameField = ({
         setTimeout(() => {
           errorSound.play();
           setOpenCards(openCards.slice(0, openCards.length - 1));
-
+          setMoves(prev => prev + 1)
           setOneImg(null);
           setTwoImg(null);
         }, 500);
       } else if (oneImg === cardName) {
         successSound.play();
         setOpenIdenticalCards((prev) => [...prev, oneImg]);
+        setMoves(prev => prev + 1)
         setOneImg(null);
         setTwoImg(null);
       }
     }
   };
+
   return (
-    <div
-      className={`${styles.gameContainer} ${styles[`containerSize${String(currentFieldsData.size)}`]}`}
-    >
-      {fieldCards.map((card, index) => (
-        <CardField
-          key={index}
-          id={index.toString()}
-          card={card}
-          openCards={openCards}
-          handleClick={handleClick}
-          openIdenticalCards={openIdenticalCards}
-          currentFieldsData={currentFieldsData}
-        />
-      ))}
-      {openGameOverWindow && (
-        <GameOverWindow setOpen={setOpenGameOverWindow} gapCount={gapCount} />
-      )}
+    <div className={styles.wrapper}>
+      <div
+        className={classNames(styles.gameContainer, styles[`containerSize${String(currentFieldsData.size)}`])}
+      >
+        {fieldCards.map((card, index) => (
+          <CardField
+            key={index}
+            id={index.toString()}
+            card={card}
+            openCards={openCards}
+            handleClick={handleClick}
+            openIdenticalCards={openIdenticalCards}
+            currentFieldsData={currentFieldsData}
+          />
+        ))}
+        {openGameOverWindow && <GameOverWindow setOpen={setOpenGameOverWindow} gapCount={gapCount} />}
+      </div>
+      <div className={styles.footer}>
+        <MoveCounter condition={moves} countOver={openGameOverWindow} />
+        <Timer startTimer={startGame} stopTimer={openGameOverWindow} />
+      </div>
     </div>
   );
 };

@@ -1,0 +1,47 @@
+import { useEffect, useState } from 'react';
+import styles from './styles.module.css';
+
+interface ITimerProps {
+  startTimer: boolean;
+  stopTimer: boolean;
+}
+
+export const Timer = ({ startTimer, stopTimer }: ITimerProps) => {
+  const [time, setTime] = useState<number>(0);
+  const [isActive, setIsActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (startTimer && !isActive) {
+      setIsActive(true);
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+      }, 1000);
+    }
+
+    if (stopTimer && isActive) {
+      setIsActive(false);
+      if (interval) clearInterval(interval);
+      setTime(0); // Сбрасываем время
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [startTimer, stopTimer, isActive]);
+
+  const formatTime = (timeInSeconds: number): string => {
+    const minutes = Math.floor(timeInSeconds / 60)
+      .toString()
+      .padStart(2, '0');
+    const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  };
+
+  return (
+    <div className={styles.timer}>
+      <p className={styles.timer__text}>Таймер: {formatTime(time)}</p>
+    </div>
+  );
+};

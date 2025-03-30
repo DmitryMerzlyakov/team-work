@@ -1,0 +1,8 @@
+.gameLayout {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}

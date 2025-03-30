@@ -9,22 +9,19 @@
 
 .button__hard {
   font-size: var(--font-size-24);
-  padding-top: var(--spacing-24);
-  padding-bottom: var(--spacing-24);
+  padding: var(--spacing-24);
   border-radius: var(--border-radius-hard);
 }
 
 .button__medium {
   font-size: var(--font-size-20);
-  padding-top: var(--spacing-16);
-  padding-bottom: var(--spacing-16);
+  padding: var(--spacing-16);
   border-radius: var(--border-radius-medium);
 }
 
 .button__small {
   font-size: var(--font-size-16);
-  padding-top: var(--spacing-8);
-  padding-bottom: var(--spacing-8);
+  padding: var(--spacing-8);
   border-radius: var(--border-radius-small);
 }
 

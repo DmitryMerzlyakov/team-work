@@ -1,0 +1,18 @@
+.game {
+  display: flex;
+  gap: var(--spacing-24);
+  flex-direction: column;
+}
+
+.game__header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.game__header_button {
+  font-weight: var(--fontWeight-700);
+  font-size: var(--font-size-20);
+  width: fit-content;
+}

@@ -1,0 +1,8 @@
+.timer {
+  padding: var(--spacing-16);
+}
+
+.timer__text {
+  font-weight: var(--fontWeight-700);
+  font-size: var(--font-size-20);
+}
