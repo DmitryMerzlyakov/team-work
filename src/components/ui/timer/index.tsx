@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
-interface TimerProps {
-  startTimer: boolean; // Условие для запуска таймера
+interface ITimerProps {
+  startTimer: boolean;
 }
 
-export const Timer = ({ startTimer }: TimerProps) => {
+export const Timer = ({ startTimer }: ITimerProps) => {
   const [time, setTime] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
 
