@@ -12,14 +12,16 @@ export const GameField = ({
   currentFieldsData,
 }: IGameFieldProps) => {
   const [openCards, setOpenCards] = useState<string[]>([]);
-  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(false);
+  const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(true);
   const [openIdenticalCards, setOpenIdenticalCards] = useState<string[]>([]);
   const [oneImg, setOneImg] = useState<string | null>(null);
   const [twoImg, setTwoImg] = useState<string | null>(null);
+  const [gapCount, setGapCount] = useState(0);
 
   const openSound = new Audio(cardOpenSound);
   const errorSound = new Audio(cardErrorSound);
   const successSound = new Audio(cardsuccessSound);
+
   useEffect(() => {
     if (openIdenticalCards.length * 2 === fieldCards.length) {
       setOpenGameOverWindow(true);
@@ -31,11 +33,12 @@ export const GameField = ({
       (e.target as Element)?.closest('[data-name]') as HTMLElement
     )?.dataset.name as string;
     const cardId = (e.target as Element).id;
-
+    console.log(openCards, cardId);
     if (openCards.includes(cardId)) {
       return;
     }
     openSound.play();
+    setGapCount((prev) => prev + 1);
     setOpenCards((prev) => [...prev, cardId]);
 
     if (!oneImg && !twoImg) {
@@ -73,7 +76,9 @@ export const GameField = ({
           currentFieldsData={currentFieldsData}
         />
       ))}
-      {openGameOverWindow && <GameOverWindow setOpen={setOpenGameOverWindow} />}
+      {openGameOverWindow && (
+        <GameOverWindow setOpen={setOpenGameOverWindow} gapCount={gapCount} />
+      )}
     </div>
   );
 };

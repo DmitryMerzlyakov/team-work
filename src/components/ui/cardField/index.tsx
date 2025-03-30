@@ -32,9 +32,10 @@ export const CardField = ({
               src={card.icon}
               alt={`Icon ${card.value}`}
               className={styles.iconImage}
+              id={id}
             />
           )}
-        </div> //позже заменб на image
+        </div>
       ) : (
         <div id={id} className={styles.cardBack}></div>
       )}
