@@ -23,6 +23,7 @@ export const GameOverWindow = ({
   };
   useEffect(() => {
     winSound.play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className={styles.gameOverScreen}>

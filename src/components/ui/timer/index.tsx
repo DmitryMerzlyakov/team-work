@@ -3,10 +3,9 @@ import styles from './styles.module.css';
 
 interface ITimerProps {
   startTimer: boolean;
-  stopTimer: boolean;
 }
 
-export const Timer = ({ startTimer, stopTimer }: ITimerProps) => {
+export const Timer = ({ startTimer }: ITimerProps) => {
   const [time, setTime] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -20,16 +19,16 @@ export const Timer = ({ startTimer, stopTimer }: ITimerProps) => {
       }, 1000);
     }
 
-    if (stopTimer && isActive) {
+    if (!startTimer) {
       setIsActive(false);
       if (interval) clearInterval(interval);
-      setTime(0); // Сбрасываем время
     }
 
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [startTimer, stopTimer, isActive]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startTimer]);
 
   const formatTime = (timeInSeconds: number): string => {
     const minutes = Math.floor(timeInSeconds / 60)

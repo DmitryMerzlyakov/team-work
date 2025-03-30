@@ -30,6 +30,7 @@ export const GameField = ({
       setOpenGameOverWindow(true);
       setStartGame(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openIdenticalCards]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -94,7 +95,7 @@ export const GameField = ({
       </div>
       <div className={styles.footer}>
         <MoveCounter condition={moves} countOver={openGameOverWindow} />
-        <Timer startTimer={startGame} stopTimer={openGameOverWindow} />
+        <Timer startTimer={startGame} />
       </div>
     </div>
   );
