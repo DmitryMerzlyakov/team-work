@@ -37,9 +37,6 @@ export const Timer: React.FC<TimerProps> = ({ startTimer }) => {
     return `${minutes}:${seconds}`;
   };
 
-  console.log(time);
-
-
   return (
     <div>
       <h3>Таймер: {formatTime(time)}</h3>
