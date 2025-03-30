@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from './styles.module.css';
 
 interface TimerProps {
   startTimer: boolean; // Условие для запуска таймера
@@ -38,8 +39,8 @@ export const Timer: React.FC<TimerProps> = ({ startTimer }) => {
   };
 
   return (
-    <div>
-      <h3>Таймер: {formatTime(time)}</h3>
+    <div className={styles.timer}>
+      <p className={styles.timer__text}>Таймер: {formatTime(time)}</p>
     </div>
   );
 };
