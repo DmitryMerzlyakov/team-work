@@ -20,7 +20,6 @@ export const GameField = ({
   const [moves, setMoves] = useState<number>(0);
   const [oneImg, setOneImg] = useState<string | null>(null);
   const [twoImg, setTwoImg] = useState<string | null>(null);
-  const [gapCount, setGapCount] = useState(0);
 
   const openSound = new Audio(cardOpenSound);
   const errorSound = new Audio(cardErrorSound);
@@ -29,6 +28,7 @@ export const GameField = ({
   useEffect(() => {
     if (openIdenticalCards.length * 2 === fieldCards.length) {
       setOpenGameOverWindow(true);
+      setStartGame(false);
     }
   }, [openIdenticalCards]);
 
@@ -39,12 +39,12 @@ export const GameField = ({
       (e.target as Element)?.closest('[data-name]') as HTMLElement
     )?.dataset.name as string;
     const cardId = (e.target as Element).id;
-    console.log(openCards, cardId);
+
     if (openCards.includes(cardId)) {
       return;
     }
     openSound.play();
-    setGapCount((prev) => prev + 1);
+    setMoves((prev) => prev + 1);
     setOpenCards((prev) => [...prev, cardId]);
 
     if (!oneImg && !twoImg) {
@@ -55,14 +55,14 @@ export const GameField = ({
         setTimeout(() => {
           errorSound.play();
           setOpenCards(openCards.slice(0, openCards.length - 1));
-          setMoves(prev => prev + 1)
+
           setOneImg(null);
           setTwoImg(null);
         }, 500);
       } else if (oneImg === cardName) {
         successSound.play();
         setOpenIdenticalCards((prev) => [...prev, oneImg]);
-        setMoves(prev => prev + 1)
+
         setOneImg(null);
         setTwoImg(null);
       }
@@ -72,7 +72,10 @@ export const GameField = ({
   return (
     <div className={styles.wrapper}>
       <div
-        className={classNames(styles.gameContainer, styles[`containerSize${String(currentFieldsData.size)}`])}
+        className={classNames(
+          styles.gameContainer,
+          styles[`containerSize${String(currentFieldsData.size)}`]
+        )}
       >
         {fieldCards.map((card, index) => (
           <CardField
@@ -85,7 +88,9 @@ export const GameField = ({
             currentFieldsData={currentFieldsData}
           />
         ))}
-        {openGameOverWindow && <GameOverWindow setOpen={setOpenGameOverWindow} gapCount={gapCount} />}
+        {openGameOverWindow && (
+          <GameOverWindow setOpen={setOpenGameOverWindow} gapCount={moves} />
+        )}
       </div>
       <div className={styles.footer}>
         <MoveCounter condition={moves} countOver={openGameOverWindow} />
