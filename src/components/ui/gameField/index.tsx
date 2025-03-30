@@ -5,7 +5,7 @@ import { IGameFieldProps } from './interfaces';
 import cardOpenSound from '../../../assets/sounds/card-open.mp3';
 import cardErrorSound from '../../../assets/sounds/card-error.mp3';
 import cardsuccessSound from '../../../assets/sounds/click-success.mp3';
-import { GameOverWindow } from '../gameOverWindow.tsx';
+import { GameOverWindow } from '../gameOverWindow/index.tsx';
 import classNames from 'classnames';
 import { MoveCounter, Timer } from '../index.ts';
 
@@ -13,6 +13,7 @@ export const GameField = ({
   fieldCards,
   currentFieldsData,
 }: IGameFieldProps) => {
+  const [timeSpent, setTimeSpent] = useState<number>(0);
   const [openCards, setOpenCards] = useState<string[]>([]);
   const [startGame, setStartGame] = useState<boolean>(false);
   const [openGameOverWindow, setOpenGameOverWindow] = useState<boolean>(false);
@@ -90,12 +91,17 @@ export const GameField = ({
           />
         ))}
         {openGameOverWindow && (
-          <GameOverWindow setOpen={setOpenGameOverWindow} gapCount={moves} />
+          <GameOverWindow
+            setOpen={setOpenGameOverWindow}
+            gapCount={moves}
+            timeSpent={timeSpent}
+            boardSize={currentFieldsData.size}
+          />
         )}
       </div>
       <div className={styles.footer}>
         <MoveCounter condition={moves} countOver={openGameOverWindow} />
-        <Timer startTimer={startGame} />
+        <Timer startTimer={startGame} onTimeUpdate={setTimeSpent} />
       </div>
     </div>
   );

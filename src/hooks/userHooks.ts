@@ -36,13 +36,15 @@ export const getUserFromDatabase = async (userId: string) => {
 export const updateLastGame = async (
   userId: string,
   boardSize: string,
-  timeSpent: number,
+  timeSpent: string,
   moves: number
 ) => {
   const userRef = doc(db, 'users', userId);
   await updateDoc(userRef, {
     'games.lastGame': { boardSize, timeSpent, moves },
   });
+  const updatedData = (await getDoc(userRef)).data();
+  console.log('Обновленные данные:', updatedData?.games);
 };
 
 export const addGameTime = async (

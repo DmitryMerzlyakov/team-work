@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
+import { formatTime } from '../../../utils/formatTime';
 
 interface ITimerProps {
   startTimer: boolean;
+  onTimeUpdate?: (time: number) => void;
 }
 
-export const Timer = ({ startTimer }: ITimerProps) => {
+export const Timer = ({ startTimer, onTimeUpdate }: ITimerProps) => {
   const [time, setTime] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -15,7 +17,11 @@ export const Timer = ({ startTimer }: ITimerProps) => {
     if (startTimer && !isActive) {
       setIsActive(true);
       interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
+        setTime((prevTime) => {
+          const newTime = prevTime + 1;
+          onTimeUpdate?.(newTime);
+          return newTime;
+        });
       }, 1000);
     }
 
@@ -29,14 +35,6 @@ export const Timer = ({ startTimer }: ITimerProps) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startTimer]);
-
-  const formatTime = (timeInSeconds: number): string => {
-    const minutes = Math.floor(timeInSeconds / 60)
-      .toString()
-      .padStart(2, '0');
-    const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
-    return `${minutes}:${seconds}`;
-  };
 
   return (
     <div className={styles.timer}>

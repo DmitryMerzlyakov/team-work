@@ -14,28 +14,38 @@ interface SignUpFormProps {
 
 export const SignUpForm = ({ changeForm }: SignUpFormProps) => {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm<IUserSing>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUserSing>();
 
   const userRegister = async (data: IUserSing) => {
     try {
       const user = await registerUser(data.email, data.password);
-      await addUserToDatabase(user.uid, data.nickName, data.name, data.password);
-      navigate(links.main)
+      console.log(user);
+      await addUserToDatabase(
+        user.uid,
+        data.nickName,
+        data.name,
+        data.password
+      );
+      navigate(links.main);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
 
   const onSubmit: SubmitHandler<IUserSing> = (data) => {
-    userRegister(data)
+    userRegister(data);
   };
 
   return (
     <form className={styles.signup} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.signup__fields}>
         <Input
-          label='Введите Ваш email'
-          inputPlaceholder='Email'
+          label="Введите Ваш email"
+          inputPlaceholder="Email"
           {...register('email', {
             required: 'Поле email обязательно для заполнения',
             maxLength: {
@@ -54,8 +64,8 @@ export const SignUpForm = ({ changeForm }: SignUpFormProps) => {
           hint={`${errors.email ? errors.email?.message : ''}`}
         />
         <Input
-          label='Введите Ваше имя'
-          inputPlaceholder='Имя'
+          label="Введите Ваше имя"
+          inputPlaceholder="Имя"
           {...register('name', {
             required: 'Поле email обязательно для заполнения',
             maxLength: {
@@ -74,8 +84,8 @@ export const SignUpForm = ({ changeForm }: SignUpFormProps) => {
           hint={`${errors.name ? errors.name?.message : ''}`}
         />
         <Input
-          label='Введите Ваш никнейм'
-          inputPlaceholder='Никнейм'
+          label="Введите Ваш никнейм"
+          inputPlaceholder="Никнейм"
           {...register('nickName', {
             required: 'Поле email обязательно для заполнения',
             minLength: {
@@ -90,8 +100,8 @@ export const SignUpForm = ({ changeForm }: SignUpFormProps) => {
           hint={`${errors.nickName ? errors.nickName?.message : ''}`}
         />
         <Input
-          label='Введите Ваш пароль'
-          inputPlaceholder='Пароль'
+          label="Введите Ваш пароль"
+          inputPlaceholder="Пароль"
           {...register('password', {
             required: 'Поле email обязательно для заполнения',
             minLength: {
@@ -106,8 +116,8 @@ export const SignUpForm = ({ changeForm }: SignUpFormProps) => {
           hint={`${errors.password ? errors.password?.message : ''}`}
         />
         <Input
-          label='Повторите Ваш пароль'
-          inputPlaceholder='Ещё раз пароль'
+          label="Повторите Ваш пароль"
+          inputPlaceholder="Ещё раз пароль"
           {...register('repeatPassword', {
             required: 'Поле email обязательно для заполнения',
             minLength: {
@@ -122,7 +132,7 @@ export const SignUpForm = ({ changeForm }: SignUpFormProps) => {
           hint={`${errors.repeatPassword ? errors.repeatPassword?.message : ''}`}
         />
       </div>
-      <Button type='submit'>Зарегистрироваться</Button>
+      <Button type="submit">Зарегистрироваться</Button>
       <Button onClick={() => changeForm(true)}>У меня уже есть аккаунт</Button>
     </form>
   );
