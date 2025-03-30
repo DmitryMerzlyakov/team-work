@@ -6,7 +6,7 @@
 }
 
 .header__children {
-  width: 300px;
+  width: fit-content;
   display: flex;
   gap: var(--spacing-8);
 }

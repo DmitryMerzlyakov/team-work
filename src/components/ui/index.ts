@@ -3,3 +3,5 @@ export * from './cardField';
 export * from './gameField';
 export * from './gameOverWindow.tsx';
 export * from './input';
+export * from './counter';
+export * from './timer';

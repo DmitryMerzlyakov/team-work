@@ -13,7 +13,11 @@ export const addUserToDatabase = async (
     name,
     password,
     games: {
-      lastGame: null,
+      lastGame: {
+        boardSize: '',
+        timeSpent: 0,
+        moves: 0,
+      },
       allGamesTime: {},
     },
   });

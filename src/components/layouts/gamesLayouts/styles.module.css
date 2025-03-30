@@ -6,15 +6,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.gameLayout__header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-.gameLayout__header_button {
-  font-weight: var(--fontWeight-700);
-  font-size: var(--font-size-20);
-}

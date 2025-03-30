@@ -1,0 +1,8 @@
+.counter {
+  padding: var(--spacing-16);
+}
+
+.counter__text {
+  font-weight: var(--fontWeight-700);
+  font-size: var(--font-size-20);
+}
