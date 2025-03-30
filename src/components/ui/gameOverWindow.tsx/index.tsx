@@ -1,28 +1,39 @@
-import { useEffect } from 'react';
 import styles from './styles.module.css';
 import win from '../../../assets/sounds/win.mp3';
-import { FormLayout } from '../../layouts/formLayout';
 import { Button } from '../button';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { IGameOverWindowsProps } from './interfaces';
 
-export const GameOverWindow = ({ setOpen }) => {
+export const GameOverWindow = ({
+  setOpen,
+  gapCount,
+}: IGameOverWindowsProps) => {
   const winSound = new Audio(win);
+  const navigate = useNavigate();
 
   const onClose = () => {
     setOpen(false);
   };
 
   let timeElapsed;
-  let movesTaken;
 
   const onNewGame = () => {
-    console.log('new game');
+    location.reload();
   };
-  // useEffect(() => {
-  //   winSound.play();
-  // }, []);
+  useEffect(() => {
+    winSound.play();
+  }, []);
   return (
     <div className={styles.gameOverScreen}>
       <div className={styles.gameOverContent}>
+        <button
+          className={styles.closeButton}
+          onClick={onClose}
+          aria-label="Закрыть окно"
+        >
+          ×
+        </button>
         <h2 className={styles.gameOverTitle}>Игра окончена!</h2>
 
         <div className={styles.statsSection}>
@@ -34,8 +45,8 @@ export const GameOverWindow = ({ setOpen }) => {
           </div>
 
           <div className={styles.statRow}>
-            <span className={styles.statLabel}>Ходов сделано:</span>
-            <span className={styles.statValue}>{movesTaken} ходов</span>
+            <span className={styles.statLabel}>Ходов сделано: </span>
+            <span className={styles.statValue}>{gapCount} ходов</span>
           </div>
 
           <div className={styles.scoreRow}>
@@ -44,7 +55,15 @@ export const GameOverWindow = ({ setOpen }) => {
         </div>
 
         <div className={styles.buttonsSection}>
-          <Button>Играть заново</Button>
+          <Button onClick={onNewGame}>Играть заново</Button>
+          <Button
+            onClick={() => {
+              navigate('/');
+            }}
+            color="secondary"
+          >
+            На главную
+          </Button>
         </div>
       </div>
     </div>
